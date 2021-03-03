@@ -1,0 +1,36 @@
+version: "3.9"
+volumes:
+  my-volume:
+    external: true
+networks:
+  default:
+    external:
+      name: matching
+
+services:
+  backend:
+    build: .
+    container_name: back-end
+    ports:
+      - 8060:8070
+    networks:
+      default:
+        aliases:
+          - backend
+    depends_on:
+      - mydb
+  mydb:
+    image: mysql
+    container_name: forumsdb
+    ports:
+      - 8088:3306
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=forumsdb
+    volumes:
+      - my-volume:/var/lib/mysql
+    networks:
+      default:
+        aliases:
+          - mydb
+

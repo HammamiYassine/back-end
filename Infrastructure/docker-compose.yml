@@ -10,7 +10,7 @@ networks:
 services:
   backend:
     build: .
-    container_name: back-end
+    container_name: backend
     ports:
       - 8060:8070
     networks:

@@ -12,7 +12,7 @@ services:
     build: .
     container_name: back_end
     ports:
-      - 8070:8070
+      - 8090:8070
     networks:
       default:
         aliases:

@@ -23,7 +23,7 @@ services:
     image: mysql
     container_name: forumsdb
     ports:
-      - 8088:3306
+      - 3306:3306
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
       - MYSQL_DATABASE=forumsdb

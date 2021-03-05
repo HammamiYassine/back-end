@@ -28,8 +28,8 @@ services:
       - mt-network  
     restart: always  
     environment:
-      - DB_HOST= mydb:3306 
-      - MYSQL_DATABASE=forumsdb
+      - DB_HOST= mydb:4000
+      - MYSQL_DATABASE=forumsdb 
     depends_on:
       - localhost  
 

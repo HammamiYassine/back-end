@@ -12,7 +12,7 @@ services:
     build: .
     container_name: back_end
     ports:
-      - 8090:8070
+      - 8070:8070
     networks:
       default:
         aliases:
@@ -23,7 +23,7 @@ services:
     image: mysql
     container_name: forumsdb
     ports:
-      - 3306:3306
+      - 4000:3306
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
       - MYSQL_DATABASE=forumsdb

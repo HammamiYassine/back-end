@@ -24,7 +24,7 @@ services:
     container_name: back_end
     restart: always
     ports:
-      - 8086:8070
+      - 8072:8070
     networks:
       - mt-network   
     environment:

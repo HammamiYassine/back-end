@@ -2,21 +2,16 @@ version: "3.9"
 volumes:
   my-volume:
     external: true
-networks:
-  default:
-    external:
-      name: matching
-
 services:
   backend:
     build: .
     container_name: back_end
     ports:
       - 8070:8070
-    networks:
-      default:
-        aliases:
-          - backend
+    restart: always  
+    environment:
+      - DB_HOST= mydb:4000 
+      - MYSQL_DATABASE=forumsdb
     depends_on:
       - mydb
   mydb:
@@ -29,8 +24,5 @@ services:
       - MYSQL_DATABASE=forumsdb
     volumes:
       - my-volume:/var/lib/mysql
-    networks:
-      default:
-        aliases:
-          - mydb
+    
 

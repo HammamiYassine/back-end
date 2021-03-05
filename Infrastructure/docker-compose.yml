@@ -6,7 +6,7 @@ networks:
   mt-network:
     driver: bridge    
 services:
-  mydb:
+  localhost:
     image: mysql
     container_name: forumsdb
     ports:
@@ -30,5 +30,5 @@ services:
       - DB_HOST= mydb:4000 
       - MYSQL_DATABASE=forumsdb
     depends_on:
-      - mydb  
+      - localhost  
 

@@ -28,7 +28,8 @@ services:
     networks:
       - mt-network   
     environment:
-      - SPRING_DATASOURCE_URL= jdbc:mysql://mydb:3306/forumsdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      - spring.datasource.username=root
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mydb:3306/forumsdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
       - MYSQL_DATABASE=forumsdb 
     depends_on:
       - mydb 

@@ -29,7 +29,6 @@ services:
       - mt-network   
     environment:
       - SPRING_DATASOURCE_URL= jdbc:mysql://mydb:3306/forumsdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
-      - DB_HOST= mydb:4000
       - MYSQL_DATABASE=forumsdb 
     depends_on:
       - mydb 

@@ -25,8 +25,7 @@ services:
     ports:
       - 8071:8070
     networks:
-      - mt-network  
-    restart: always  
+      - mt-network   
     environment:
       - DB_HOST= mydb:4000
       - MYSQL_DATABASE=forumsdb 

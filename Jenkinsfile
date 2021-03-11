@@ -55,8 +55,8 @@ pipeline{
         steps {
              bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit"
              bat "mvn release:update-versions"
-             git "add ."
-             git "change version"            
+             bat "git add ."
+             bat "git commit -m "change version""           
              bat "git push \"${REPO_URL}\""
             
         }

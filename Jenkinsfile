@@ -5,6 +5,7 @@ pipeline{
     maven 'maven'
     }
     environment {
+        REPO_URL= 'https://github.com/HammamiYassine/back-end.git'
         NEXUS_VERSION= "3"
         NEXUS_PROTOCOL="http"
         NEXUS_URL="http://localhost:8082/"
@@ -49,6 +50,13 @@ pipeline{
                repository: 'backend',
                version: '0.0.1'
              }
+        }
+        stage ('increment version'){
+        steps {
+            bat  "mvn release:clean"
+            bat "mvn release:update-versions -DautoVersionSubmodules=true"
+            bat "git push \"${REPO_URL}\" master --tags"
+        }
         }
         stage ('deploy'){
             steps{

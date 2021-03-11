@@ -53,9 +53,9 @@ pipeline{
         }
         stage ('increment version'){
         steps {
-            bat  "mvn release:clean"
-            bat "mvn release:update-versions -DautoVersionSubmodules=true"
-            bat "git push \"${REPO_URL}\" master --tags"
+             bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit"
+             bat "git push \"${REPO_URL}\""
+            
         }
         }
         stage ('deploy'){

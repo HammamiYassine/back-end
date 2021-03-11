@@ -50,15 +50,6 @@ pipeline{
                version: '0.0.1'
              }
         }
-        stage ('show version')
-        {
-            steps { 
-                script {
-            def mavenPom = readMavenPom 'pom.xml'
-                    version : "${mavenPom.version}"    
-            }
-            }
-        }    
         stage ('deploy'){
             steps{
         bat '''cd C:\\Users\\yassi\\.jenkins\\workspace\\back-end\\Infrastructure

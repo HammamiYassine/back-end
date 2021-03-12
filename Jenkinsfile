@@ -39,7 +39,7 @@ pipeline{
                    [
                        artifactId: 'ForumServerSide',
                        classifier: '',
-                       file: 'target/ForumServerSide-${VERSION}.jar',
+                       file: "target/ForumServerSide-${VERSION}.jar",
                        type: 'jar'
                        ]
                        ],
@@ -49,7 +49,7 @@ pipeline{
                nexusVersion: 'nexus3',
                protocol: 'http',
                repository: 'backend',
-               version: '${VERSION}'
+               version: "${VERSION}"
              }
         }
         stage ('increment version'){

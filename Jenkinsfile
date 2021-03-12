@@ -5,6 +5,7 @@ pipeline{
     maven 'maven'
     }
     environment {
+        VERSION = readMavenPom().getVersion()
         REPO_URL= 'https://github.com/HammamiYassine/back-end.git'
         NEXUS_VERSION= "3"
         NEXUS_PROTOCOL="http"
@@ -38,7 +39,7 @@ pipeline{
                    [
                        artifactId: 'ForumServerSide',
                        classifier: '',
-                       file: 'target/ForumServerSide-0.0.1.jar',
+                       file: 'target/ForumServerSide-${VERSION}.jar',
                        type: 'jar'
                        ]
                        ],
@@ -48,7 +49,7 @@ pipeline{
                nexusVersion: 'nexus3',
                protocol: 'http',
                repository: 'backend',
-               version: '0.0.1'
+               version: '${VERSION}'
              }
         }
         stage ('increment version'){
@@ -60,14 +61,6 @@ pipeline{
              bat "git push \"${REPO_URL}\""
             
         }
-        }
-        stage ('deploy'){
-            steps{
-        bat '''cd C:\\Users\\yassi\\.jenkins\\workspace\\back-end\\Infrastructure
-copy C:\\Users\\yassi\\.jenkins\\workspace\\back-end\\target\\ForumServerSide-0.0.1-SNAPSHOT.jar .\\ForumServerSide-0.0.1-SNAPSHOT.jar
-docker-compose down
-docker-compose up -d '''
-            }
         }
     }
 }

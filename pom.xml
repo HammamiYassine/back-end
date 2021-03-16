@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>tn.Forum</groupId>
 	<artifactId>ForumServerSide</artifactId>
-	<version>0.0.14-SNAPSHOT</version>
+	<version>0.0.14</version>
 	<name>ForumServerSide</name>
 	<description>Demo project for Spring Boot</description>
 

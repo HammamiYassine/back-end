@@ -5,13 +5,12 @@ pipeline{
     maven 'maven'
     }
     environment {
-        VERSION = readMavenPom().getVersion()
         REPO_URL= 'https://github.com/HammamiYassine/back-end.git'
         NEXUS_VERSION= "3"
         NEXUS_PROTOCOL="http"
-        NEXUS_URL="http://localhost:8082/"
-        NEXUS_REPOSITORY="backend"
-        NEXUS_CREDENTIALS_ID="1234"
+        NEXUS_URL="http://192.168.0.106:8082/"
+        NEXUS_REPOSITORY="back"
+        NEXUS_CREDENTIALS_ID="nexus"
     }
     stages {
         stage ('SCM'){
@@ -22,19 +21,22 @@ pipeline{
         }
         stage ('Maven Build'){
             steps{
-               bat "mvn clean package -Dmaven.test.skip=true -X"
+               sh "mvn clean package -Dmaven.test.skip=true -X"
             }
         }
         stage ('SonarQube analysis'){
             steps {
             withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonar') {
-            bat '''
+            sh '''
             mvn sonar:sonar'''    
             }
         }
         }
         stage ('pushing artifact to nexus'){
              steps{
+                 script {
+                     def POM = readMavenPom file: 'pom.xml'
+                     def VERSION = POM.version
                nexusArtifactUploader artifacts: [
                    [
                        artifactId: 'ForumServerSide',
@@ -43,24 +45,28 @@ pipeline{
                        type: 'jar'
                        ]
                        ],
-               credentialsId: '1234',
+               credentialsId: 'nexus',
                groupId: 'tn.Forum',
-               nexusUrl: 'localhost:8082/',
+               nexusUrl: '192.168.0.106:8082/',
                nexusVersion: 'nexus3',
                protocol: 'http',
-               repository: 'backend',
+               repository: 'back',
                version: "${VERSION}"
              }
+             }
         }
-        stage ('increment version'){
-        steps {
-             bat "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit"
-             bat "mvn release:update-versions"
-             bat 'git add .'
-             bat 'git commit -m "change commit"'         
-             bat "git push \"${REPO_URL}\""
-            
-        }
-        }
+        stage('Increment Version') {
+            steps {
+                script {
+                    sh 'git config --global user.email "yassine_hammamii@yahoo.com"'
+                    sh 'git config --global user.name "HammamiYassine"'
+                    sh 'mvn release:update-versions'
+                    sh 'git add .'
+                    sh 'git commit -m "change commit"'
+                    sh 'git remote set-url origin git@github.com:HammamiYassine/back-end.git'
+                    sh 'git push -u origin master'
+                }  
+                }
     }
+}
 }

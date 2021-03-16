@@ -19,7 +19,7 @@ pipeline{
                 url: 'https://github.com/HammamiYassine/back-end.git'
             }
         }
-        tage ('remove snapshot') {
+        stage ('remove snapshot') {
             steps {
              sh 'mvn versions:set -DremoveSnapshot'
         }

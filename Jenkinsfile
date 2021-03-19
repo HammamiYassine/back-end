@@ -48,6 +48,7 @@ pipeline{
                 }
             }
         }
+        }
         stage ('pushing artifact to nexus'){
              steps{
                  script {

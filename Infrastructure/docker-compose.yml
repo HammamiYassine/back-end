@@ -8,7 +8,6 @@ networks:
 services:
   mydb:
     image: mysql
-    restart: always
     container_name: forumsdb
     ports:
       - 4000:3306

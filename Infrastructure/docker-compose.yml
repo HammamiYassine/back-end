@@ -21,7 +21,6 @@ services:
   backend:
     build: .
     container_name: back_end
-    restart: always
     ports:
       - 8070:8070
     networks:

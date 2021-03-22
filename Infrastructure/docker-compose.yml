@@ -11,6 +11,8 @@ services:
     container_name: forumsdb
     ports:
       - 4000:3306
+    security_opt:
+      - seccomp:unconfined  
     networks:
       - mt-network      
     environment:
@@ -22,9 +24,7 @@ services:
     build: .
     container_name: back_end
     ports:
-      - 8070:8070
-    security_opt:
-      - seccomp:unconfined  
+      - 8070:8070  
     networks:
       - mt-network
     environment:

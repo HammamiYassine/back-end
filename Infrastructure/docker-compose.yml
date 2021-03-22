@@ -23,6 +23,8 @@ services:
     container_name: back_end
     ports:
       - 8070:8070
+    security_opt:
+      - seccomp:unconfined  
     networks:
       - mt-network
     environment:

@@ -37,16 +37,6 @@ pipeline{
             }
         }
         }
-        stage ('Quality gate') {
-            steps {
-                script {        
-           def qg = waitForQualityGate() 
-           if (qg.status != 'OK') {
-             error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                                  }
-                }
-            }
-        }
         stage ('pushing artifact to nexus'){
              steps{
                  script {

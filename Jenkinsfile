@@ -19,11 +19,6 @@ pipeline{
                 url: 'https://github.com/HammamiYassine/back-end.git'
             }
         }
-        stage ('remove snapshot') {
-            steps {
-             sh 'mvn versions:set -DremoveSnapshot'
-        }
-        }
         stage ('Maven Build'){
             steps{
                sh "mvn clean package -Dmaven.test.skip=true -X"
@@ -65,7 +60,7 @@ pipeline{
                 script {
                     sh 'git config --global user.email "yassine_hammamii@yahoo.com"'
                     sh 'git config --global user.name "HammamiYassine"'
-                    sh 'mvn release:update-versions'
+                    sh 'mvn release:release'
                     sh 'git add .'
                     sh 'git commit -m "change commit"'
                     sh 'git remote set-url origin git@github.com:HammamiYassine/back-end.git'
